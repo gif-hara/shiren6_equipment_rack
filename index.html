@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武器選択ページ</title>
+    <script>
+        // ページが読み込まれたときにクッキーからチェックボックスの状態を復元する
+        window.onload = function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                const savedState = getCookie(checkbox.id);
+                if (savedState === "true") {
+                    checkbox.checked = true;
+                }
+            });
+        };
+
+        // チェックボックスの状態が変わったときにクッキーに保存する
+        function saveState(checkbox) {
+            setCookie(checkbox.id, checkbox.checked, 7); // 7日間保存
+        }
+
+        // クッキーを設定する関数
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + "; " + expires + "; path=/";
+        }
+
+        // クッキーを取得する関数
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    </script>
+</head>
+<body>
+    <h1>武器選択ページ</h1>
+    <div>
+        <h2>武器</h2>
+        <input type="checkbox" id="weapon-katana" onchange="saveState(this)"> カタナ<br>
+        <input type="checkbox" id="weapon-wooden" onchange="saveState(this)"> 木刀<br>
+    </div>
+    <div>
+        <h2>青武器</h2>
+        <input type="checkbox" id="blue-weapon-katana" onchange="saveState(this)"> カタナ<br>
+        <input type="checkbox" id="blue-weapon-wooden" onchange="saveState(this)"> 木刀<br>
+    </div>
+    <div>
+        <h2>金武器</h2>
+        <input type="checkbox" id="gold-weapon-katana" onchange="saveState(this)"> カタナ<br>
+        <input type="checkbox" id="gold-weapon-wooden" onchange="saveState(this)"> 木刀<br>
+    </div>
+    <div>
+        <h2>盾</h2>
+        <input type="checkbox" id="shield" onchange="saveState(this)"> 通常盾<br>
+    </div>
+    <div>
+        <h2>青盾</h2>
+        <input type="checkbox" id="blue-shield" onchange="saveState(this)"> 青の盾<br>
+    </div>
+    <div>
+        <h2>金盾</h2>
+        <input type="checkbox" id="gold-shield" onchange="saveState(this)"> 金の盾<br>
+    </div>
+</body>
+</html>
