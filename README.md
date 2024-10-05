@@ -1,0 +1,1 @@
+# shiren6_equipment_rack
