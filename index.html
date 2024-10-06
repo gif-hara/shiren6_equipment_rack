@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>風来のシレン6 装備品かけチェック</title>
+    <style>
+        .hidden { display: none; }
+    </style>
     <script>
-        // ページが読み込まれたときにクッキーからチェックボックスの状態を復元する
         window.onload = function() {
+            document.getElementById('filter-unchecked').addEventListener('click', filterUnchecked);
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
                 const savedState = getCookie(checkbox.id);
@@ -40,10 +43,24 @@
             }
             return null;
         }
+
+        // チェックの付いていないアイテムのみ表示するフィルター機能
+        function filterUnchecked() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                const label = checkbox.parentElement;
+                if (checkbox.checked) {
+                    label.style.display = 'none';
+                } else {
+                    label.style.display = 'block';
+                }
+            });
+        }
     </script>
 </head>
 <body>
     <h1>風来のシレン6 装備品かけチェック</h1>
+    <button id="filter-unchecked">チェックの付いていないもののみ表示</button>
     <div>
         <h2>武器</h2>
         <label><input type="checkbox" id="weapon-wooden" onchange="saveState(this)"> 木刀</label><br>
@@ -230,50 +247,5 @@
         <label><input type="checkbox" id="blue-shield-kinkui" onchange="saveState(this)"> 金食い虫の盾</label><br>
         <label><input type="checkbox" id="blue-shield-tekai-taiken" onchange="saveState(this)"> 鉄塊の大盾</label><br>
         <label><input type="checkbox" id="blue-shield-steak-plate" onchange="saveState(this)"> ステーキプレート</label><br>
-        <label><input type="checkbox" id="blue-shield-konjou" onchange="saveState(this)"> 根性の盾</label><br>
-        <label><input type="checkbox" id="blue-shield-zeccouchou" onchange="saveState(this)"> 絶好調の盾</label><br>
-        <label><input type="checkbox" id="blue-shield-satori" onchange="saveState(this)"> サトリの盾</label><br>
-        <label><input type="checkbox" id="blue-shield-haramochi" onchange="saveState(this)"> ハラモチの盾</label><br>
-        <label><input type="checkbox" id="blue-shield-medetai" onchange="saveState(this)"> めでたい御守</label><br>
-        <label><input type="checkbox" id="blue-shield-otoguge" onchange="saveState(this)"> お告げの盾</label><br>
-        <label><input type="checkbox" id="blue-shield-yamanba-nabebuta" onchange="saveState(this)"> 山姥の鍋ぶた</label><br>
-        <label><input type="checkbox" id="blue-shield-tsukaisute" onchange="saveState(this)"> 使い捨ての盾</label><br>
-    </div>
-    <div>
-        <h2>金盾</h2>
-        <label><input type="checkbox" id="gold-shield-mokukou" onchange="saveState(this)"> 木甲の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-bronze" onchange="saveState(this)"> 青銅甲の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-iron" onchange="saveState(this)"> 鉄甲の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-oniookami" onchange="saveState(this)"> おにおおかみ</label><br>
-        <label><input type="checkbox" id="gold-shield-fuma" onchange="saveState(this)"> 風魔の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-rasenfuma" onchange="saveState(this)"> 螺旋風魔の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-gold" onchange="saveState(this)"> 金の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-battle-counter" onchange="saveState(this)"> バトルカウンター</label><br>
-        <label><input type="checkbox" id="gold-shield-mikiri" onchange="saveState(this)"> 見切りの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-dragon" onchange="saveState(this)"> ドラゴンシールド</label><br>
-        <label><input type="checkbox" id="gold-shield-bakuhatsuin" onchange="saveState(this)"> 爆発隠の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-minotaur" onchange="saveState(this)"> ミノタウロスの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-todoyoke" onchange="saveState(this)"> トドよけの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-gamarayoke" onchange="saveState(this)"> ガマラよけの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-itazurayoke" onchange="saveState(this)"> いたずらよけの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-nigiriyoke" onchange="saveState(this)"> にぎりよけの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-ototo" onchange="saveState(this)"> オトトの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-kappa" onchange="saveState(this)"> カッパのお皿</label><br>
-        <label><input type="checkbox" id="gold-shield-gaze" onchange="saveState(this)"> ゲイズの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-mahoyoke" onchange="saveState(this)"> 魔法よけの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-fudou" onchange="saveState(this)"> 不動の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-zabuton" onchange="saveState(this)"> ざぶとん</label><br>
-        <label><input type="checkbox" id="gold-shield-kinkui" onchange="saveState(this)"> 金食い虫の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-tekai-taiken" onchange="saveState(this)"> 鉄塊の大盾</label><br>
-        <label><input type="checkbox" id="gold-shield-steak-plate" onchange="saveState(this)"> ステーキプレート</label><br>
-        <label><input type="checkbox" id="gold-shield-konjou" onchange="saveState(this)"> 根性の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-zeccouchou" onchange="saveState(this)"> 絶好調の盾</label><br>
-        <label><input type="checkbox" id="gold-shield-satori" onchange="saveState(this)"> サトリの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-haramochi" onchange="saveState(this)"> ハラモチの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-medetai" onchange="saveState(this)"> めでたい御守</label><br>
-        <label><input type="checkbox" id="gold-shield-otoguge" onchange="saveState(this)"> お告げの盾</label><br>
-        <label><input type="checkbox" id="gold-shield-yamanba-nabebuta" onchange="saveState(this)"> 山姥の鍋ぶた</label><br>
-        <label><input type="checkbox" id="gold-shield-tsukaisute" onchange="saveState(this)"> 使い捨ての盾</label><br>
-    </div>
-</body>
+        <label><input type="checkbox" id
 </html>
